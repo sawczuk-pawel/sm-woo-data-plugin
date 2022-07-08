@@ -34,9 +34,36 @@ class SmMain {
      * SmMain constructor.
      */
     public function __construct(){
-        $this::$loginInUserId = get_current_user_id();
-        add_action('wp_enqueue_scripts', array($this, 'loadAssets'));
-        $init = new SmPanel();
+        if($this->checkWoocmmerceStatus()){
+            $this::$loginInUserId = get_current_user_id();
+            add_action('wp_enqueue_scripts', array($this, 'loadAssets'));
+            $init = new SmPanel();
+        }
+        else{
+            add_action( 'admin_notices', array($this, 'showErrorNotice') );
+        }
+    }
+
+    /**
+     * Show notice in admin panel if WooCommerce not active
+     */
+    public function showErrorNotice(){
+        echo '<div class="notice notice-error is-dismissible">
+      <p><strong>SM WooCommerce Data</strong> ' .
+      __('plugin for correct work needs active WooCommerce!') . '</p>
+      </div>';
+    }
+
+    /**
+     * Check WooCommerce plugin status
+     * @return bool
+     */
+    private function checkWoocmmerceStatus(){
+        if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -44,6 +71,5 @@ class SmMain {
      */
     public function loadAssets(){
         wp_enqueue_script('sm_custom_script', plugin_dir_url('/assets/script.js'), array(), '1', true);
-        wp_localize_script( 'sm_custom_script', 'ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' ), 'nonce' => wp_create_nonce('ajax-nonce') ) );
     }
 }
