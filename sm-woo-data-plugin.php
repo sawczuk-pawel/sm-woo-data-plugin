@@ -23,7 +23,10 @@ spl_autoload_register( function ( $class ) {
     }
 } );
 
+function smInit(){
+    new SmMain();
+}
+add_action('init', 'Sm\smInit');
 
-new SmMain();
 
 
