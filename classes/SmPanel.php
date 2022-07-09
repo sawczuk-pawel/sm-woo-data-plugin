@@ -1,6 +1,7 @@
 <?php
-
 namespace Sm;
+defined( 'ABSPATH' ) || exit;
+
 /**
  * Class SmPanel
  * @package Sm
