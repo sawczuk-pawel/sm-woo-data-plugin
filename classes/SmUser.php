@@ -1,10 +1,16 @@
 <?php
-
-
 namespace Sm;
 defined( 'ABSPATH' ) || exit;
 
+/**
+ * Class SmUser
+ * @package Sm
+ */
 class SmUser{
+    /**
+     * @var
+     */
+    public static $user_id;
 
     /**
      * SmUser constructor.
@@ -28,7 +34,6 @@ class SmUser{
     {
         self::$user_id = get_current_user_id();
     }
-    public static $user_id;
 
 
 
