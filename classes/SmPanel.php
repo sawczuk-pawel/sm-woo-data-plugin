@@ -48,6 +48,6 @@ class SmPanel{
      * Load panel content
      */
     function loadContent() {
-        echo 'Example content';
+        echo SmTemplate::renderPanel('form');
     }
 }

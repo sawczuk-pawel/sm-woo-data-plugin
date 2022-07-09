@@ -27,6 +27,16 @@ class SmTemplate{
     }
 
     /**
+     * Render panel form
+     * @return false|string
+     */
+    public function renderPanel(){
+        ob_start();
+        echo self::renderTheme('form');
+        return ob_get_clean();
+    }
+
+    /**
      * Render template from file, we could overwrite plugin templates by coping folder 'templates' to our theme root and modify files
      * @param string $template_name
      * @param array $data

@@ -13,6 +13,10 @@ class SmMain {
     public function __construct(){
         add_action( 'init', array($this, 'init'));
         add_action( 'widgets_init', array($this, 'initWidget') );
+        if($this->checkWoocmmerceStatus()) {
+            new SmPanel();
+            new SmAjax();
+        }
     }
 
     /**
@@ -22,7 +26,6 @@ class SmMain {
         if($this->checkWoocmmerceStatus()){
             SmUser::setUserId();
             add_action('wp_enqueue_scripts', array($this, 'loadAssets'));
-            new SmPanel();
         }
         else{
             add_action( 'admin_notices', array($this, 'showErrorNotice') );
@@ -60,5 +63,6 @@ class SmMain {
      */
     public function loadAssets(){
         wp_enqueue_script('sm_custom_script', plugin_dir_url( __FILE__ ) . '/../../assets/scripts.js', array(), SM_VERSION, true);
+        wp_localize_script( 'sm_custom_script', 'ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' ), 'nonce' => wp_create_nonce('ajax-nonce') ) );
     }
 }
