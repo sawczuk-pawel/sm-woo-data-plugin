@@ -9,6 +9,7 @@ Description: Plugin to show data from external API
 namespace Sm;
 const SM_TEXTDOMAIN = 'sm-woocommerce-data';
 const SM_VERSION = '1.0';
+const SM_PLUGIN_DIR = WP_PLUGIN_DIR . '/sm-woo-data-plugin';
 defined( 'ABSPATH' ) || exit;
 
 spl_autoload_register( function ( $class ) {
