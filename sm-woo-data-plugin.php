@@ -7,6 +7,8 @@ Description: Plugin to show data from external API
 */
 
 namespace Sm;
+const SM_TEXTDOMAIN = 'sm-woocommerce-data';
+const SM_VERSION = '1.0';
 defined( 'ABSPATH' ) || exit;
 
 spl_autoload_register( function ( $class ) {
@@ -23,10 +25,7 @@ spl_autoload_register( function ( $class ) {
     }
 } );
 
-function smInit(){
-    new SmMain();
-}
-add_action('init', 'Sm\smInit');
+new SmMain();
 
 
 
