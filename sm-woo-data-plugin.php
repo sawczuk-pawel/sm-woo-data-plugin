@@ -28,5 +28,10 @@ spl_autoload_register( function ( $class ) {
 
 new SmMain();
 
+register_uninstall_hook( __FILE__, 'Sm\pluginUninstall' );
+function pluginUninstall() {
+    delete_transient('sm_woo_user_data');
+    wp_clear_scheduled_hook("wp_sm_woo_data_cron");
+}
 
 
