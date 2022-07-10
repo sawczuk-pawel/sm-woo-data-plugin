@@ -63,14 +63,14 @@ class SmFakeApi{
      * @return array[]
      */
     public static function getData(){
-        $cache_name = 'sm_woo_user_' . SmUser::setUserId();
+        $cache_name = 'sm_woo_user_data';
         if(get_transient($cache_name)){
             $output = get_transient($cache_name);
         }
         else{
             $tmpData = SmFakeApi::getDataApi();
             delete_transient($cache_name);
-            set_transient($cache_name, SmFakeApi::getDataApi(), 900);
+            set_transient($cache_name, $tmpData, 900);
             $output = $tmpData;
         }
         return $output;
