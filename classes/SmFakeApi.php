@@ -62,7 +62,7 @@ class SmFakeApi{
      * Function generate random data fake API response and add them to transient
      * @return array[]
      */
-    public function getData(){
+    public static function getData(){
         $cache_name = 'sm_woo_user_' . SmUser::setUserId();
         if(get_transient($cache_name)){
             $output = get_transient($cache_name);
@@ -70,7 +70,7 @@ class SmFakeApi{
         else{
             $tmpData = SmFakeApi::getDataApi();
             delete_transient($cache_name);
-            set_transient($cache_name, SmFakeApi::getDataApi(), 1200);
+            set_transient($cache_name, SmFakeApi::getDataApi(), 900);
             $output = $tmpData;
         }
         return $output;

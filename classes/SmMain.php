@@ -16,6 +16,7 @@ class SmMain {
         if($this->checkWoocmmerceStatus()) {
             new SmPanel();
             new SmAjax();
+            new SmCron();
         }
     }
 
